@@ -20,13 +20,14 @@ name = HGT_M
         rel_path= default:topo_2m/
 ===============================
 name=LANDUSEF
-        priority=1
+        priority=2
         dest_type=categorical
         z_dim_name=land_cat
         landmask_water =   modis_30s:17            # Calculate a landmask from this field
         landmask_water = modis_lakes:17,21         # Calculate a landmask from this field
         landmask_water =  usgs_lakes:16,28         # Calculate a landmask from this field
         landmask_water =    nlcd2006:17            # Calculate a landmask from this field
+        landmask_water = wur-landuse:16            # Calculate a landmask from this field
         landmask_water =     default:16            # Calculate a landmask from this field
         dominant=LU_INDEX
         interp_option =    nlcd2006:nearest_neighbor
@@ -40,6 +41,8 @@ name=LANDUSEF
         interp_option =          5m:four_pt
         interp_option =         10m:four_pt
         interp_option =      default:four_pt
+        interp_option =        wur-landuse:nearest_neighbor
+	fill_missing = 7
         rel_path=    nlcd2006:nlcd2006_ll_30s/
         rel_path=    ssib_10m:ssib_landuse_10m/
         rel_path=     ssib_5m:ssib_landuse_5m/
@@ -50,6 +53,15 @@ name=LANDUSEF
         rel_path=          2m:landuse_2m/
         rel_path=          5m:landuse_5m/
         rel_path=         10m:landuse_10m/
+        rel_path=     default:landuse_2m/
+        abs_path=         wur-landuse:/home/jiska/wrfinput/landuse
+===============================
+name=LANDUSEF
+        priority=1
+        dest_type=categorical
+        z_dim_name=land_cat
+        landmask_water =     default:16            # Calculate a landmask from this field
+        interp_option =      default:four_pt
         rel_path=     default:landuse_2m/
 ===============================
 name=SOILTEMP
@@ -317,11 +329,18 @@ name = VAR_SSO
         interp_option =   default:average_gcell(4.0)+four_pt+average_4pt
         rel_path =        default:varsso/
 ===============================
-#name=URB_PARAM
-#        priority=1
-#        dest_type=continuous
-#        fill_missing = 0.
-#        z_dim_name=num_urb_params
-#        interp_option=default:nearest_neighbor
-#        rel_path=default:NUDAPT44_1km/
-#===============================
+name=URB_PARAM
+        priority=1
+        dest_type=continuous
+        fill_missing = 0.
+        z_dim_name=num_urb_params
+        interp_option=   default:average_gcell(1.0)+four_pt+search
+        abs_path=        default:/home/jiska/wrfinput/myurb
+===============================
+name=FRC_URB2D
+        priority=1
+        dest_type=continuous
+        fill_missing = 0.
+        interp_option=default:average_gcell(1.0)+four_pt
+        abs_path=     default:/home/jiska/wrfinput/urbanfraction
+===============================
