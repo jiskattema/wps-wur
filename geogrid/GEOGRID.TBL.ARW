@@ -61,8 +61,8 @@ name=LANDUSEF
         dest_type=categorical
         z_dim_name=land_cat
         landmask_water =     default:16            # Calculate a landmask from this field
-        interp_option =      default:four_pt
-        rel_path=     default:landuse_2m/
+        interp_option =      default:nearest_neighbor
+        rel_path=     default:landuse_30s/
 ===============================
 name=SOILTEMP
         priority=1
@@ -78,14 +78,6 @@ name=SOILCTOP
         z_dim_name=soil_cat
         dominant=SCT_DOM
         interp_option = wur-landuse:nearest_neighbor
-        wur-landuse:/home/jiska/wrfinput/soiltype_top_wur
-        rel_path= default:soiltype_top_2m/
-===============================
-name=SOILCTOP
-        priority=1
-        dest_type=categorical
-        z_dim_name=soil_cat
-        dominant=SCT_DOM
         interp_option =     30s:nearest_neighbor
         interp_option =      2m:four_pt
         interp_option =      5m:four_pt
@@ -95,7 +87,15 @@ name=SOILCTOP
         rel_path=      2m:soiltype_top_2m/
         rel_path=      5m:soiltype_top_5m/
         rel_path=     10m:soiltype_top_10m/
-        rel_path= default:soiltype_top_2m/
+        rel_path=           default:soiltype_top_2m/
+        abs_path=       wur-landuse:/home/jiska/wrfinput/soiltype_top_wur
+===============================
+name=SOILCTOP
+        priority=1
+        dest_type=categorical
+        z_dim_name=soil_cat
+        interp_option = default:nearest_neighbor
+        rel_path= default:soiltype_top_30s/
 ===============================
 name=SOILCBOT
         priority=1
